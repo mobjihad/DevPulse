@@ -1,14 +1,19 @@
 import type { Request, Response } from "express";
 import authService from "./auth.service";
 import { sendResponse } from "../../utils";
-
+import {role as roles} from "../../types/index"
 
 
 export const signup= async(req: Request , res: Response) => {
 
     const {name,email,password,role} = req.body
 
-
+    if(!roles.includes(role)){
+             sendResponse(res,false,{
+            message:"Invalid Role"
+        },400)
+        return
+    }
     const user = await authService.signup({name,email,password,role})
 
     if(!user){

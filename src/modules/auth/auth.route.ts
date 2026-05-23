@@ -4,7 +4,7 @@ import { signup } from "./auth.controller";
 const router = Router(); 
 
 
-router.post("/api/auth/signup" , signup)
+router.post("/signup" , signup)
 
 
 
