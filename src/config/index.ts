@@ -6,7 +6,8 @@ dotenv.config({ quiet: true})
 const config={
 
     port:env.PORT,
-    connection_string: env.CONNECTION_STRING as string
+    connection_string: env.CONNECTION_STRING as string,
+    environment: env.NODE_ENV as string
 
 }
 
