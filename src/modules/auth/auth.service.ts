@@ -1,6 +1,6 @@
 
 import  {pool}  from "../../db";
-import type { Ruser } from "../../types";
+import type { returnedUser, Ruser } from "../../types";
 import bcrypt from "bcrypt"
 
 class authService {
@@ -20,6 +20,31 @@ class authService {
   
     }
 
+    async login(userData: {email: string , password: string}) : Promise<returnedUser | null >{
+
+        const {email, password} = userData; 
+
+        const queryText = " SELECT * FROM users WHERE email=$1";
+        const values = [email]
+
+        const user = await pool.query(queryText,values);
+
+        if(user.rows.length===0){
+            return null;
+        }
+
+        const dbUser = user.rows[0] 
+       
+        const isValid = await bcrypt.compare(password, dbUser.password);
+
+        const {password: _, ...ruser} = dbUser 
+       
+        return isValid? ruser : null; 
+
+
+
+
+    }
 
 
 

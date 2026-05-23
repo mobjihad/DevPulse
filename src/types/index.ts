@@ -17,3 +17,5 @@ export type User = {
 }
 
 export type Ruser = Omit<User, "id"|"password"| "created_at" | "updated_at">
+export type returnedUser = Omit<User, "password">
+export type jtwSuitedUser = Omit<User, "password"|"email">

@@ -1,7 +1,7 @@
 import type { Response } from "express";
 
 
-export function sendResponse<T>(res:Response , success: boolean, payload:{message?: unknown , data?: T }, status:number=200):void{
+export function sendResponse<T>(res:Response , success: boolean, payload:{message?: unknown , data?: T, error?:unknown }, status:number=200):void{
 
     const { message, data } = payload;
 
@@ -9,6 +9,7 @@ export function sendResponse<T>(res:Response , success: boolean, payload:{messag
            success,
            message : message || "",
            data: data !== undefined? data : null
+           
            
         })
 }
