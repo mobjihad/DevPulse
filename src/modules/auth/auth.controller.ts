@@ -1,8 +1,9 @@
 import type { Request, Response } from "express";
 import authService from "./auth.service";
 import { sendResponse } from "../../utils";
-import {role as roles, type returnedUser} from "../../types/index"
-import { singToken } from "../../utils/signJWTToken";
+import {role as roles, type returnedUser, type User} from "../../types/index"
+import { singToken, verifyJWT } from "../../utils/jwt";
+import type { JwtPayload } from "jsonwebtoken";
 
 
 export const signup= async(req: Request , res: Response) => {
@@ -58,5 +59,44 @@ export const login = async(req: Request , res: Response) =>{
             user: user}
     },200)
 
+
+}
+
+export const checkValidUserRole=async (token:string ,req: Request)=>{
+
+    const decodedToken =await verifyJWT(token) 
+        
+         if(decodedToken){
+           const validrole =  await verifyAccess(decodedToken)
+            
+           if(validrole){
+
+            req.user = {
+               userId: decodedToken.id 
+                            
+            };
+
+            return true
+           }
+           return false
+         }
+        
+         return false
+}
+
+export const verifyAccess = async(user: JwtPayload) =>{
+
+
+ const {id} = user 
+     
+ const retrivedUser = await authService.findUserById(id)
+
+ if(retrivedUser){
+
+    if(roles.includes(retrivedUser.role)){
+        return true;
+    }
+ }
+  return false
 
 }

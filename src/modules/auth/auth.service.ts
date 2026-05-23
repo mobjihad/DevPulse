@@ -46,7 +46,19 @@ class authService {
 
     }
 
+    async findUserById(id: number){
 
+        const queryText = "SELECT * FROM users WHERE id=$1";
+        const values = [id];
+        const user = await pool.query(queryText,values);
+
+        if(user.rows.length===0){
+            return null;
+        }
+        
+        return user.rows[0]
+
+    }
 
 }
 
