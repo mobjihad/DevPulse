@@ -92,9 +92,9 @@ export const getIssuebyID =async(req : Request, res: Response) =>{
 
 export const getAllIssues=async(req: Request , res: Response)=>{
 
-         const sortMethod = req.query.sort || 'newest';
-         const issueType = req.query.type;
-         const status = req.query.status;
+         const sortMethod = req.query.sort as string || 'newest';
+         const issueType = req.query.type as string;
+         const status = req.query.status as string;
 
          let sortCriteria = {};
          
@@ -104,7 +104,7 @@ export const getAllIssues=async(req: Request , res: Response)=>{
                     sortCriteria = { created_at: 1 };
          }
        
-        const issues = await issuesService.getAllIssues()
+        const issues = await issuesService.getAllIssues(sortMethod,issueType,status)
          if(!issues){
 
             sendResponse(res,false,{

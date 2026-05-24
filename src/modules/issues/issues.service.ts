@@ -31,7 +31,15 @@ class issueService{
     async getAllIssues(sortMethod?:string, issueType?:string, issueStatus?:string){ 
 
 
-        const queryText = "SELECT * FROM issues"
+        let queryText = "SELECT * FROM issues"
+
+        if(sortMethod && sortMethod=="newest"){
+            queryText = queryText + " ORDER BY updated_at DESC"
+        }else if(sortMethod && sortMethod=="oldest"){
+            queryText=queryText+" ORDER BY updated_at ASC"
+        }
+
+        console.log(queryText)
         const returnedIssues = await pool.query(queryText)
         const finalResults = []
         if(returnedIssues.rows){
