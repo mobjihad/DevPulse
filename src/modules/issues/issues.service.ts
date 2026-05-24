@@ -1,5 +1,5 @@
 import { pool } from "../../db";
-import type { insertIssueType } from "../../types";
+import type { insertIssueType, updateIssueType } from "../../types";
 
 
 class issueService{
@@ -68,6 +68,21 @@ class issueService{
       
 
       
+    }
+
+    async updateIssue(payload : updateIssueType , id:number){
+
+        const {title,description,type} = payload
+
+        const queryText = "UPDATE issues SET title=$1 , description=$2,type=$3, updated_at =NOW() WHERE id=$4 RETURNING *"
+        const values = [title,description,type,id]
+
+        const updatedIssue = await pool.query(queryText, values)
+
+
+        return updatedIssue.rows[0]
+       
+
     }
 
 }

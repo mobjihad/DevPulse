@@ -40,3 +40,5 @@ export type Issues = {
 }
 
 export type insertIssueType = Pick<Issues , "title"|"description"|"type"|"reporter_id">
+
+export type updateIssueType = Omit<insertIssueType , "reporter_id">

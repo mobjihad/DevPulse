@@ -18,8 +18,8 @@ export const verifyJWT = async(token: string) =>{
 
     const decodedToken = await jwt.verify(token, config.jwt_secret) as JwtPayload
 
-   console.log(decodedToken)
-   return decodedToken; 
+   
+     return decodedToken; 
 
 
 }

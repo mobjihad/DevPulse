@@ -122,3 +122,26 @@ export const getAllIssues=async(req: Request , res: Response)=>{
         
         
 }
+
+export const updateIssue = async(req: Request, res: Response)=>{
+
+        const issueId = Number(req.params.id)
+        const {title, description,type} = req.body
+
+        const updatedIssues = await issuesService.updateIssue({title,description,type},issueId)
+      
+
+        if(!updatedIssues){
+            
+            sendResponse(res, false, {
+                message: "Unable to update the issue"
+            },)
+            return
+        }
+
+        sendResponse(res, true, {
+            message:  "Issue updated successfully",
+            data:updatedIssues
+        },200)
+
+}

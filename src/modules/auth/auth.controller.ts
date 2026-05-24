@@ -62,8 +62,9 @@ export const login = async(req: Request , res: Response) =>{
 
 }
 
-export const checkValidUserRole=async (token:string ,req: Request)=>{
+export const checkValidUserRole=async (req: Request)=>{
 
+    const token = req.headers.authorization as string
     const decodedToken =await verifyJWT(token) 
         
          if(decodedToken){
