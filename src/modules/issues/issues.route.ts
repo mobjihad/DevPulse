@@ -1,13 +1,12 @@
 import { Router } from "express";
 import { authorisedUser } from "../../middleware/auth";
-import { createIssues } from "./issues.controller";
+import { createIssues, getIssuebyID } from "./issues.controller";
 
 
 const router = Router();
 
 router.post("/", authorisedUser(["maintainer","contributor"]), createIssues)
-
-
+router.get("/:id", getIssuebyID)
 
 
 

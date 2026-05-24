@@ -7,7 +7,7 @@ export function sendResponse<T>(res:Response , success: boolean, payload:{messag
 
       res.status(status).json({
            success,
-           message : message || "",
+            message : message || "",
            data: data !== undefined? data : null
            
            

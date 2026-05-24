@@ -3,6 +3,7 @@ import issuesService from "./issues.service";
 import { verifyJWT } from "../../utils/jwt";
 import { sendResponse } from "../../utils";
 import { issuestatus, itype } from "../../types";
+import authService from "../auth/auth.service";
 
 
 export const createIssues= async(req: Request , res: Response)=>{
@@ -40,6 +41,50 @@ export const createIssues= async(req: Request , res: Response)=>{
         message:"Issue created successfully",
         data:newIssue
        } ,201)
+
+
+
+}
+
+export const getIssuebyID =async(req : Request, res: Response) =>{
+
+    const paramid = Number(req.params.id)
+
+    const issues = await issuesService.getIssuebyID( paramid)
+    
+    if(!issues){
+
+        sendResponse(res, false, {
+                message: "Issue Not Found"
+        },404)
+
+        return 
+    }
+    const {id,title,description,type, status, created_at, updated_at } = issues
+
+    const reporterID = issues.reporter_id
+
+    const reporterDetails = await authService.findUserById(reporterID)
+
+    const {id: reporter_id, name, role} = reporterDetails
+
+    const reporter = {
+        id, name, role
+    }
+
+    sendResponse(res, true, {
+        data:{
+            id:id,
+            title:title,
+            description:description,
+            type:type,
+            status:status,
+            reporter: reporter,
+            created_at:created_at,
+            updated_at:updated_at
+        }
+    },200)
+    
 
 
 

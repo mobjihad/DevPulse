@@ -15,6 +15,19 @@ class issueService{
         return newIssue
     }
 
+    async getIssuebyID(id:number){
+
+        const queryText = "SELECT * FROM issues WHERE id=$1"
+        const values = [id];
+
+        const returnedIssue = await pool.query(queryText,values);
+
+        if(returnedIssue.rows.length===0){
+            return null
+        }
+        return returnedIssue.rows[0]; 
+    }
+
 }
 
 
