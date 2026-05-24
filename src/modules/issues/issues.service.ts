@@ -28,6 +28,40 @@ class issueService{
         return returnedIssue.rows[0]; 
     }
 
+    async getAllIssues(sortMethod?:string, issueType?:string, issueStatus?:string){ 
+
+
+        const queryText = "SELECT * FROM issues"
+        const returnedIssues = await pool.query(queryText)
+        const finalResults = []
+        if(returnedIssues.rows){
+            
+            const issues= returnedIssues.rows 
+
+            for( const issue of issues){ 
+            const reporter = await pool.query(`SELECT name,id,role FROM users WHERE id=$1`,[issue.reporter_id])
+
+                
+            const {reporter_id: _,created_at, updated_at,  ...coreData} = issue
+
+            finalResults.push({
+                ...coreData,
+                reporter:reporter.rows[0],
+                created_at,
+                updated_at
+            })
+            }
+        }else {
+
+            return null
+        }
+        return finalResults
+        
+      
+
+      
+    }
+
 }
 
 

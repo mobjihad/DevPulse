@@ -89,3 +89,36 @@ export const getIssuebyID =async(req : Request, res: Response) =>{
 
 
 }
+
+export const getAllIssues=async(req: Request , res: Response)=>{
+
+         const sortMethod = req.query.sort || 'newest';
+         const issueType = req.query.type;
+         const status = req.query.status;
+
+         let sortCriteria = {};
+         
+             if (sortMethod === 'newest') {
+                          sortCriteria = { created_at: -1 };
+             } else if (sortMethod=== 'oldest') {
+                    sortCriteria = { created_at: 1 };
+         }
+       
+        const issues = await issuesService.getAllIssues()
+         if(!issues){
+
+            sendResponse(res,false,{
+
+                message:"Not found"
+            },404)
+            return
+         }
+
+
+        sendResponse(res,true,{
+            data:issues
+              
+        },200)
+        
+        
+}
