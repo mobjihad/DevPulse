@@ -12,7 +12,7 @@ class issueService{
         const values= [title,description,type,reporter_id]
         const newIssue = await pool.query(queryText,values)
         
-        return newIssue
+        return newIssue.rows[0]
     }
 
     async getIssuebyID(id:number){
@@ -83,6 +83,15 @@ class issueService{
         return updatedIssue.rows[0]
        
 
+    }
+
+    async deleteIssues(id:number){
+
+        const queryText = "DELETE FROM issues WHERE id=$1"
+        const values= [id]
+
+        const result = await pool.query(queryText,values)
+        return result.rowCount;
     }
 
 }
