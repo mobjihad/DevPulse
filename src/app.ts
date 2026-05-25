@@ -6,8 +6,16 @@ import cors from "cors";
 
 const app : Application = express()
  app.use(cors()); 
- 
+
 app.use(express.json())
+
+app.get("/", (_req, res) => {
+    res.json({
+      success: true,
+      message: "DevPulse API",
+      endpoints: ["/api/auth/signup", "/api/auth/login", "/api/issues"],
+    });
+  });
 
 app.use("/api/auth",authRoutes)
 app.use("/api/issues", issueRoutes)
