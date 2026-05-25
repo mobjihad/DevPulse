@@ -1,6 +1,6 @@
-import config from "../config";
-import { verifyAccess } from "../modules/auth/auth.controller";
-import type {jtwSuitedUser } from "../types";
+import config from "../config/index.js";
+import { verifyAccess } from "../modules/auth/auth.controller.js";
+import type {jtwSuitedUser } from "../types/index.js";
 import jwt, { type JwtPayload } from "jsonwebtoken"
 
 export const singToken=(payload: jtwSuitedUser )=>{

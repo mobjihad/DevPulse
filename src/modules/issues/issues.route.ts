@@ -1,8 +1,8 @@
 import { Router } from "express";
-import { authorisedUser } from "../../middleware/auth";
-import { createIssues, deleteIssue, getAllIssues, getIssuebyID, updateIssue} from "./issues.controller";
-import { validatedToUpdate } from "../../middleware/updateIssue";
-import {authorisedMaintainer}  from "../../middleware/maintainerAuth";
+import { authorisedUser } from "../../middleware/auth.js";
+import { createIssues, deleteIssue, getAllIssues, getIssuebyID, updateIssue} from "./issues.controller.js";
+import { validatedToUpdate } from "../../middleware/updateIssue.js";
+import {authorisedMaintainer}  from "../../middleware/maintainerAuth.js";
 
 
 const router = Router();

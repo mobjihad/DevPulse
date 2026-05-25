@@ -1,9 +1,9 @@
 import type { Request, Response } from "express";
-import issuesService from "./issues.service";
-import { verifyJWT } from "../../utils/jwt";
-import { sendResponse } from "../../utils/sendResponse";
-import { issuestatus, itype } from "../../types";
-import authService from "../auth/auth.service";
+import issuesService from "./issues.service.js";
+import { verifyJWT } from "../../utils/jwt.js";
+import { sendResponse } from "../../utils/sendResponse.js";
+import { issuestatus, itype } from "../../types/index.js";
+import authService from "../auth/auth.service.js";
 
 export const createIssues = async(req: Request, res: Response) => {
     const reporter_id = req.user!.userId; 

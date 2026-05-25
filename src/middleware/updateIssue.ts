@@ -1,5 +1,5 @@
 import type { NextFunction, Request, Response } from "express"
-import authVerify from "../utils/authUtis"
+import authVerify from "../utils/authUtis.js"
 
 export const validatedToUpdate = () =>{
 

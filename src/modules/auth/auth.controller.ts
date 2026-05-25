@@ -1,8 +1,8 @@
 import type { Request, Response } from "express";
-import authService from "./auth.service";
-import { sendResponse } from "../../utils/sendResponse";
-import { role as roles, type returnedUser, type User } from "../../types/index";
-import { singToken, verifyJWT } from "../../utils/jwt";
+import authService from "./auth.service.js";
+import { sendResponse } from "../../utils/sendResponse.js";
+import { role as roles, type returnedUser, type User } from "../../types/index.js";
+import { singToken, verifyJWT } from "../../utils/jwt.js";
 import type { JwtPayload } from "jsonwebtoken";
 
 export const signup = async(req: Request, res: Response) => {

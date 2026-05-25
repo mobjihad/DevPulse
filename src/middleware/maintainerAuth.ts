@@ -1,7 +1,7 @@
 import type { NextFunction, Request, Response } from "express"
-import type { Role } from "../types"
-import authVerify from "../utils/authUtis"
-import {  checkMaintainer } from "../modules/auth/auth.controller"
+import type { Role } from "../types/index.js"
+import authVerify from "../utils/authUtis.js"
+import {  checkMaintainer } from "../modules/auth/auth.controller.js"
 
 
 export const authorisedMaintainer = (authorised: Role)=>{

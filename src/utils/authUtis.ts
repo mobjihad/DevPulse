@@ -1,9 +1,9 @@
 import type { Request, Response, NextFunction } from "express";
-import { sendResponse } from "./sendResponse";
-import { checkValidUserRole } from "../modules/auth/auth.controller";
-import issuesService from "../modules/issues/issues.service";
-import { verifyJWT } from "./jwt";
-import authService from "../modules/auth/auth.service";
+import { sendResponse } from "./sendResponse.js";
+import { checkValidUserRole } from "../modules/auth/auth.controller.js";
+import issuesService from "../modules/issues/issues.service.js";
+import { verifyJWT } from "./jwt.js";
+import authService from "../modules/auth/auth.service.js";
 
 class authVerify {
 

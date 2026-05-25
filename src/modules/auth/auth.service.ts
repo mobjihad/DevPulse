@@ -1,6 +1,6 @@
 
-import  {pool}  from "../../db";
-import type { returnedUser, Ruser } from "../../types";
+import  {pool}  from "../../db/index.js";
+import type { returnedUser, Ruser } from "../../types/index.js";
 import bcrypt from "bcrypt"
 
 class authService {

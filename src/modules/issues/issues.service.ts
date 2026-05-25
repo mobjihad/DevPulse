@@ -1,5 +1,5 @@
-import { pool } from "../../db";
-import type { insertIssueType, updateIssueType } from "../../types";
+import { pool } from "../../db/index.js";
+import type { insertIssueType, updateIssueType } from "../../types/index.js";
 
 
 class issueService{

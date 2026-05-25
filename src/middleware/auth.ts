@@ -1,9 +1,9 @@
 import type { NextFunction, Request, Response } from "express";
-import type { Role } from "../types";
-import { sendResponse } from "../utils/sendResponse";
-import { verifyJWT } from "../utils/jwt";
-import {  checkValidUserRole, verifyAccess } from "../modules/auth/auth.controller";
-import authVerify from "../utils/authUtis"
+import type { Role } from "../types/index.js";
+import { sendResponse } from "../utils/sendResponse.js";
+import { verifyJWT } from "../utils/jwt.js";
+import {  checkValidUserRole, verifyAccess } from "../modules/auth/auth.controller.js";
+import authVerify from "../utils/authUtis.js"
 
 export const authorisedUser = (authorised : Role[]) =>{
 
